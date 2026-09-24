@@ -1,0 +1,138 @@
+/* ---- Edit these values to restyle the whole site ---- */
+:root {
+  --paper: #f5f6fa;
+  --card: #ffffff;
+  --ink: #14182b;
+  --muted: #565c78;
+  --line: #dde0ec;
+  --blue: #2f5bff;      /* visitor bubble, links */
+  --mint: #c9f2e3;      /* Nada's bubbles */
+  --mint-ink: #0c3b2e;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { width: min(1000px, 100% - 2.5rem); margin-inline: auto; }
+
+a { color: var(--blue); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; }
+
+/* ---- Hero ---- */
+.hero { background: var(--card); border-bottom: 1px solid var(--line); padding: 4rem 0 3.5rem; }
+
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+
+h1 { font-size: clamp(2.6rem, 6vw, 4.25rem); font-weight: 700; letter-spacing: -0.02em; }
+
+.role { font-size: 1.25rem; font-weight: 500; margin: 0.75rem 0 0.25rem; }
+.loc { color: var(--muted); margin: 0 0 1.5rem; }
+
+.contact { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-weight: 500; }
+
+/* Chat mock-up */
+.chat { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.bubble {
+  margin: 0;
+  padding: 0.7rem 1.05rem;
+  max-width: 88%;
+  font-size: 1rem;
+  line-height: 1.45;
+  border-radius: 1.25rem;
+  animation: pop 0.4s ease-out both;
+}
+.bubble.them { background: var(--blue); color: #fff; border-bottom-left-radius: 0.3rem; align-self: flex-start; }
+.bubble.me { background: var(--mint); color: var(--mint-ink); border-bottom-right-radius: 0.3rem; align-self: flex-end; }
+
+.bubble:nth-child(2) { animation-delay: 0.5s; }
+.bubble:nth-child(3) { animation-delay: 1s; }
+.bubble:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
+
+/* ---- Sections ---- */
+main section { padding: 3rem 0 0.5rem; }
+
+h2 { font-size: 1.9rem; font-weight: 700; margin-bottom: 1.5rem; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+
+.meta { color: var(--muted); font-size: 0.95rem; margin: 0.15rem 0 0; }
+
+#about p { max-width: 68ch; margin: 0; }
+
+/* Experience timeline: a real sequence, so a rail makes sense */
+.job {
+  position: relative;
+  margin-left: 0.5rem;
+  padding: 0 0 2rem 1.75rem;
+  border-left: 2px solid var(--line);
+}
+.job:last-child { padding-bottom: 0.5rem; }
+.job::before {
+  content: "";
+  position: absolute;
+  left: -0.5rem; top: 0.35rem;
+  width: 0.85rem; height: 0.85rem;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--blue);
+}
+.job-head { margin-bottom: 0.6rem; }
+.job ul { margin: 0; padding-left: 1.1rem; max-width: 72ch; }
+.job li { margin-bottom: 0.35rem; }
+.tags { margin: 0.8rem 0 0; color: var(--muted); font-size: 0.95rem; max-width: 72ch; }
+.tags strong { color: var(--ink); }
+
+/* Columns */
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.cols h3 { margin-bottom: 0.7rem; }
+.cols p { margin: 0; }
+
+.chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.95rem;
+}
+
+.plain { list-style: none; padding: 0; margin: 0; }
+.plain li { padding: 0.5rem 0; border-top: 1px solid var(--line); font-size: 0.98rem; }
+.plain li:first-child { border-top: 0; padding-top: 0; }
+
+/* ---- Footer ---- */
+footer { margin-top: 4rem; padding: 2rem 0; background: var(--ink); color: #dfe2f2; }
+footer p { margin: 0; }
+footer a { color: var(--mint); }
+
+/* ---- Responsive ---- */
+@media (max-width: 800px) {
+  .hero { padding: 2.5rem 0; }
+  .hero-grid, .cols { grid-template-columns: 1fr; gap: 2rem; }
+  .bubble { max-width: 95%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bubble { animation: none; }
+}
+
+@media print {
+  .chat, footer { display: none; }
+  body { background: #fff; }
+}
